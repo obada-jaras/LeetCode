@@ -15,7 +15,7 @@ class Solution {
         while (!q.isEmpty()){
             int qSize = q.size();
             
-            for (int i = 0; i < qSize; i++) {
+            while (qSize-- > 0) {
                 String curr = q.poll();
 
                 if (visited.contains(curr)) continue;
