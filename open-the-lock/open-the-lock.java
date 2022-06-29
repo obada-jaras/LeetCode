@@ -22,7 +22,7 @@ class Solution {
                 if (curr.equals(target)) return level;
                 
                 for (String nextState: getNextsStates(curr)){
-                    if (!visited.contains(nextState)) q.offer(nextState);
+                    q.offer(nextState);
                 }
                 visited.add(curr);
             }
@@ -41,10 +41,12 @@ class Solution {
             char c = allChars[i];
             
             allChars[i] = (c == '9') ? '0' : (char) (c+1);
-            set.add(new String(allChars));
+            if (!visited.contains(new String(allChars)))
+                set.add(new String(allChars));
 
             allChars[i] = (c == '0') ? '9' : (char) (c-1);
-            set.add(new String(allChars));
+            if (!visited.contains(new String(allChars)))
+                set.add(new String(allChars));
             
             allChars[i] = c;
         }
