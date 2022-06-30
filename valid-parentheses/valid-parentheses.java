@@ -16,6 +16,6 @@ class Solution {
         }
         
         if (stk.empty()) return true;
-        else return false;
+        return false;
     }
 }
