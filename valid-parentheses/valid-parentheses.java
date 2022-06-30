@@ -5,22 +5,22 @@ class Solution {
         char[] chars = s.toCharArray();
         for (char c: chars) {
             if (c == '(') stk.push(c);
-            if (c == '{') stk.push(c);
-            if (c == '[') stk.push(c);
+            else if (c == '{') stk.push(c);
+            else if (c == '[') stk.push(c);
             
-            if (stk.empty()) return false;
+            else if (stk.empty()) return false;
             
-            if (c == ')') {
+            else if (c == ')') {
                 char poped = stk.pop();
                 if (poped != '(') return false;
             }
             
-            if (c == '}') {
+            else if (c == '}') {
                 char poped = stk.pop();
                 if (poped != '{') return false;
             }
             
-            if (c == ']') {
+            else if (c == ']') {
                 char poped = stk.pop();
                 if (poped != '[') return false;
             }
