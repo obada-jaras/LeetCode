@@ -10,20 +10,9 @@ class Solution {
             
             else if (stk.empty()) return false;
             
-            else if (c == ')') {
-                char poped = stk.pop();
-                if (poped != '(') return false;
-            }
-            
-            else if (c == '}') {
-                char poped = stk.pop();
-                if (poped != '{') return false;
-            }
-            
-            else if (c == ']') {
-                char poped = stk.pop();
-                if (poped != '[') return false;
-            }
+            else if (c == ')' && stk.pop() != '(') return false;
+            else if (c == '}' && stk.pop() != '{') return false;
+            else if (c == ']' && stk.pop() != '[') return false;
         }
         
         if (stk.empty()) return true;
