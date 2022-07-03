@@ -3,7 +3,7 @@ class Solution {
         Stack<String> stk = new Stack<>();
         
         for (int i = 0; i < tokens.length; i++) {
-            if (isNumeric(tokens[i]))
+            if (!"*-+/".contains(tokens[i]))
                 stk.push(tokens[i]);
             
             else {
@@ -28,17 +28,5 @@ class Solution {
         }
         
         return Integer.parseInt(stk.pop());
-    }
-    
-    
-    
-    public static boolean isNumeric(String str) { 
-        try {  
-            Integer.parseInt(str);  
-            return true;
-            
-        } catch(NumberFormatException e){  
-            return false;  
-        }  
     }
 }
