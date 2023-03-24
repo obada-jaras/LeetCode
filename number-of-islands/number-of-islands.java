@@ -1,35 +1,21 @@
 class Solution {
+    private int rowsCount;
+    private int columnsCount;
+    private char [][] grid;
+    private final int[][] DIRECTIONS = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
     public int numIslands(char[][] grid) {
-        int rowsCount = grid.length;
-        int columnsCount = grid[0].length;
         int islandsCount = 0;
 
-        int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-        Stack<int[]> stack = new Stack<>();
+        this.grid = grid;
+        rowsCount = grid.length;
+        columnsCount = grid[0].length;
 
         for (int i = 0; i < rowsCount; i++) {
             for (int j = 0; j < columnsCount; j++) {
                 if (grid[i][j] == '1') {
-                    grid[i][j] = '2';    // mark it as visited
-
-                    stack.push(new int[] {i, j});
                     islandsCount++;
-
-                    while (!stack.empty()) {
-                        int[] coordinates = stack.pop();
-
-                        for (int[] dir: directions) {
-                            int row = coordinates[0] + dir[0];
-                            int col = coordinates[1] + dir[1];
-
-                            if (isInside(row, col, rowsCount, columnsCount)) {
-                                if (grid[row][col] == '1') {
-                                    stack.push(new int[]{row, col});
-                                    grid[row][col] = '2';
-                                }
-                            }
-                        }
-                    }
+                    dfc(i, j);
                 }
             }
         }
@@ -37,7 +23,20 @@ class Solution {
         return islandsCount;
     }
 
-    private boolean isInside(int row, int col, int rowsCount, int columnsCount) {
+    private void dfc(int row, int col) {
+        if (isInside(row, col) && grid[row][col] == '1') {
+            grid[row][col] = '2';
+
+            for (int[] dir : DIRECTIONS) {
+                int newRow = row + dir[0];
+                int newCol = col + dir[1];
+
+                dfc(newRow, newCol);
+            }
+        }
+    }
+
+    private boolean isInside(int row, int col) {
         return row >= 0 && col >= 0 && row < rowsCount && col < columnsCount;
     }
 }
