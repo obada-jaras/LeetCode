@@ -5,18 +5,18 @@ class Solution {
         int islandsCount = 0;
 
         int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-        Queue<int[]> queue = new LinkedList<>();
+        Stack<int[]> stack = new Stack<>();
 
         for (int i = 0; i < rowsCount; i++) {
             for (int j = 0; j < columnsCount; j++) {
                 if (grid[i][j] == '1') {
                     grid[i][j] = '2';    // mark it as visited
 
-                    queue.add(new int[] {i, j});
+                    stack.push(new int[] {i, j});
                     islandsCount++;
 
-                    while (!queue.isEmpty()) {
-                        int[] coordinates = queue.poll();
+                    while (!stack.empty()) {
+                        int[] coordinates = stack.pop();
 
                         for (int[] dir: directions) {
                             int row = coordinates[0] + dir[0];
@@ -24,7 +24,7 @@ class Solution {
 
                             if (isInside(row, col, rowsCount, columnsCount)) {
                                 if (grid[row][col] == '1') {
-                                    queue.add(new int[]{row, col});
+                                    stack.push(new int[]{row, col});
                                     grid[row][col] = '2';
                                 }
                             }
