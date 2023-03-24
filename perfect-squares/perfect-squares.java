@@ -1,39 +1,44 @@
 
 class Solution {
     public int numSquares(int n) {
-        int root = (int)Math.sqrt(n);
-        int[] perfectSquares = new int[root+1];
-        for (int i = 0; i <= root; i++) {
-            perfectSquares[i] = i * i;
-        }
-
-        boolean[] visited = new boolean[n+1];
-
-
-        int level = 0;
-
+        List<Integer> perfectSquares = generatePerfectSquares(n);
         Queue<Integer> queue = new LinkedList<>();
+        Set<Integer> visited = new HashSet<>();
+        
         queue.add(n);
+        visited.add(n);
+        
+        int level = 0;
 
         while (!queue.isEmpty()) {
             level++;
-
             int qSize = queue.size();
-            while (qSize-- > 0) {
-                int num = queue.poll();
+            
+            for (int i = 0; i < qSize; i++) {
+                int currentValue = queue.poll();
 
-                for (int i = 0; i < perfectSquares.length; i++) {
-                    int remain = num - perfectSquares[i];
+                for (int perfectSquare : perfectSquares) {
+                    int remaining = currentValue - perfectSquare;
 
-                    if (remain == 0) return level;
+                    if (remaining == 0) {
+                        return level;
+                    }
 
-                    if (remain > 0 && !visited[remain]) {
-                        queue.add(remain);
-                        visited[remain] = true;
+                    if (remaining > 0 && !visited.contains(remaining)) {
+                        queue.add(remaining);
+                        visited.add(remaining);
                     }
                 }
             }
         }
         return level;
+    }
+
+    private List<Integer> generatePerfectSquares(int n) {
+        List<Integer> perfectSquares = new ArrayList<>();
+        for (int i = 1; i * i <= n; i++) {
+            perfectSquares.add(i * i);
+        }
+        return perfectSquares;
     }
 }
