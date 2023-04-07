@@ -3,8 +3,7 @@ class Solution {
         HashSet<Integer> set = new HashSet<>();
         
         for (Integer i : nums) {
-            if (set.contains(i)) return true;
-            set.add(i);
+            if (!set.add(i)) return true;
         }
         
         return false;
