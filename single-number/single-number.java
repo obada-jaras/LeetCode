@@ -1,14 +1,11 @@
-import java.util.*;
-
 class Solution {
     public int singleNumber(int[] nums) {
-        Hashtable<Integer, Integer> hash = new Hashtable<>();
+        int answer = 0;
         
         for (Integer i : nums) {
-            if (!hash.containsKey(i)) hash.put(i, 1);
-            else if (hash.get(i) == 1) hash.remove(i);
+            answer ^= i;
         }
         
-        return (int)hash.keySet().toArray()[0];
+        return answer;
     }
 }
