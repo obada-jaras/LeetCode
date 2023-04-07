@@ -19,8 +19,8 @@ class Solution {
     }
     
     private void swap(int p1, int p2) {
-        int temp = nums[p1];
-        nums[p1] = nums[p2];
-        nums[p2] = temp;
+        int temp = this.nums[p1];
+        this.nums[p1] = this.nums[p2];
+        this.nums[p2] = temp;
     }
 }
