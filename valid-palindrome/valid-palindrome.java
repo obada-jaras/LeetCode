@@ -22,7 +22,7 @@ class Solution {
             if (c >= 'A' && c <= 'Z')
                 newStr += Character.toLowerCase(c);
             
-            if ((c >= 'a' && c <= 'z' ) || (c >= '0' && c <= '9')) 
+            else if ((c >= 'a' && c <= 'z' ) || (c >= '0' && c <= '9')) 
                 newStr += c;
         }
         
