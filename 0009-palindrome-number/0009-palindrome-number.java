@@ -3,7 +3,7 @@ class Solution {
         if (x < 0) return false;
         
         int reversed = reverse(x);
-        if (reversed == -1) return false;
+        // if (reversed == -1) return false;
         
         while (x > 0) {
             if (x%10 != reversed%10) return false;
