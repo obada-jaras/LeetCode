@@ -1,18 +1,13 @@
 class Solution {
-    int[] memo;
-    
     public int climbStairs(int n) {
-        memo = new int[n+1];
+        int one = 1, two = 1;
         
-        return countWays(n);
-    }
-    
-    private int countWays(int n) {
-        if (n == 0 || n == 1) return 1;
+        for (int i = 0; i < n - 1; i++) {
+            int temp = one;
+            one += two;
+            two = temp;
+        }
         
-        if (memo[n] != 0) return memo[n];
-        
-        memo[n] = countWays(n-1) + countWays(n-2);
-        return memo[n];
+        return one;
     }
 }
