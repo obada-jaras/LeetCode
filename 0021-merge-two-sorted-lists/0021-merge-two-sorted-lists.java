@@ -27,15 +27,11 @@ class Solution {
             pM = pM.next;
         }
         
-        while (p1 != null) {
-            pM.next = p1;
-            p1 = p1.next;
-            pM = pM.next;
-        }
         
-        while (p2 != null) {
-            pM.next = p2;
-            p2 = p2.next;
+        ListNode pR = (p1 != null) ? p1 : p2;
+        while (pR != null) {
+            pM.next = pR;
+            pR = pR.next;
             pM = pM.next;
         }
         
