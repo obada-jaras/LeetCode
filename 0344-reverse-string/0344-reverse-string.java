@@ -1,13 +1,11 @@
 class Solution {
     public void reverseString(char[] s) {
-        if (s.length == 0) return;
-        reverse(s, 0, s.length-1);
-    }
-    
-    private void reverse(char[] s, int low, int high) {
-        if (low >= high) return;
-        swap(s, low, high);
-        reverse(s, low+1, high-1);
+        int low = 0, high = s.length-1;
+        
+        while (low < high) {
+            swap(s, low, high);
+            low++; high--;
+        }
     }
     
     private void swap(char[] s, int low, int high) {
