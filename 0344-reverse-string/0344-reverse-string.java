@@ -9,8 +9,8 @@ class Solution {
     }
     
     private void swap(char[] s, int low, int high) {
-        s[low] += s[high]; 
-        s[high] = (char) (s[low] - s[high]);
-        s[low] -= s[high];
+        s[low] ^= s[high];
+        s[high] ^= s[low];
+        s[low] ^= s[high];
     }
 }
