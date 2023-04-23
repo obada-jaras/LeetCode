@@ -16,7 +16,7 @@ class Solution {
                     currLength++;
                     curr++;
                 }
-                longest = currLength > longest ? currLength : longest;
+                longest = Math.max(longest, currLength);
             }
         }
         
