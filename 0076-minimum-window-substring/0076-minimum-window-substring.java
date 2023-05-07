@@ -2,41 +2,41 @@ class Solution {
     public String minWindow(String s, String t) {
         if (t.isEmpty()) return "";
 
-        int[] tFrequency = new int[128];
+        int[] targetFrequency = new int[128];
         int[] windowFrequency = new int[128];
 
         for (char c : t.toCharArray()) {
-            tFrequency[c]++;
+            targetFrequency[c]++;
         }
 
-        int have = 0, need = t.length();
-        int lRes = -1, rRes = -1, resLen = Integer.MAX_VALUE;
+        int matchedCharacters = 0, targetLength = t.length();
+        int leftResult = -1, rightResult = -1, minLength = Integer.MAX_VALUE;
 
-        int lP = 0;
-        for (int rP = 0; rP < s.length(); rP++) {
-            char c = s.charAt(rP);
-            windowFrequency[c]++;
+        int leftPointer = 0;
+        for (int rightPointer = 0; rightPointer < s.length(); rightPointer++) {
+            char currentChar = s.charAt(rightPointer);
+            windowFrequency[currentChar]++;
 
-            if (tFrequency[c] > 0 && windowFrequency[c] <= tFrequency[c]) {
-                have++;
+            if (targetFrequency[currentChar] > 0 && windowFrequency[currentChar] <= targetFrequency[currentChar]) {
+                matchedCharacters++;
             }
 
-            while (have == need) {
-                if (rP - lP + 1 < resLen) {
-                    lRes = lP;
-                    rRes = rP;
-                    resLen = rP - lP + 1;
+            while (matchedCharacters == targetLength) {
+                if (rightPointer - leftPointer + 1 < minLength) {
+                    leftResult = leftPointer;
+                    rightResult = rightPointer;
+                    minLength = rightPointer - leftPointer + 1;
                 }
 
-                char currChar = s.charAt(lP);
-                windowFrequency[currChar]--;
-                if (tFrequency[currChar] > 0 && windowFrequency[currChar] < tFrequency[currChar]) {
-                    have--;
+                char removedChar = s.charAt(leftPointer);
+                windowFrequency[removedChar]--;
+                if (targetFrequency[removedChar] > 0 && windowFrequency[removedChar] < targetFrequency[removedChar]) {
+                    matchedCharacters--;
                 }
-                lP++;
+                leftPointer++;
             }
         }
 
-        return (resLen != Integer.MAX_VALUE) ? s.substring(lRes, rRes + 1) : "";
+        return (minLength != Integer.MAX_VALUE) ? s.substring(leftResult, rightResult + 1) : "";
     }
 }
