@@ -6,22 +6,30 @@ class Solution {
             int mid = left + (right - left)/2;
             if (target == nums[mid]) return mid;
             
-            if (nums[left] <= nums[mid]) { // left part is sorted
-                if (target >= nums[left] && target < nums[mid]) { // target in the left part (sorted part)
+            // left part is sorted
+            if (nums[left] <= nums[mid]) {
+                
+                // target in the left part (sorted part)
+                if (target >= nums[left] && target < nums[mid]) {
                     right = mid - 1;
                 }
                 
-                else { // target in the right part (unsorted part)
+                // target in the right part (unsorted part)
+                else {
                     left = mid + 1;
                 }
             }
             
-            else { // right part is sorted
-                if (target > nums[mid] && target <= nums[right]) { // target in the right part (sorted part)
+            // right part is sorted
+            else {
+                
+                // target in the right part (sorted part)
+                if (target > nums[mid] && target <= nums[right]) {
                     left = mid + 1;
                 }
                 
-                else { // target in the left part (unsorted part)
+                // target in the left part (unsorted part)
+                else {
                     right = mid - 1;
                 }
             }
